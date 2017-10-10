@@ -15,10 +15,10 @@ class Details extends React.Component {
         console.log(data)
     }
     render() {
-        if (!this.props.info.name) return null
+        if (!this.props.info) return null
         return (
-            <div>
-                {console.log('details', this.props.info.name)}
+            <div className='box'>
+                {/* {console.log('details', this.props.info.name)} */}
                 <div className="row">
                     <div className="col-md-4">
                         <Img src={this.props.info.image.original} className="thumbnail"/>

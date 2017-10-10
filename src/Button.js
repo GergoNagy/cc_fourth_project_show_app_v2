@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Button = (props) => {
 
 
@@ -11,7 +12,7 @@ const Button = (props) => {
                 <button
                     key={props.listValue.show.id}
                     className="btn btn-primary"
-                    onClick={props.handleClick}>Details</button>
+                    onClick={() => props.handleClick(props.listValue.show)}>Details</button>
             </div>
         </div>
     )

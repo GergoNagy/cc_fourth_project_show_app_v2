@@ -58,4 +58,36 @@ li {
   }
 }
 
+.test-class {
+  transition: opacity 1s ease-in;
+  position: fixed;
+  width: 80%
+}
+
+#customStyles {
+    
+        top: '50%';
+        left: '50%';
+        right: 'auto';
+        bottom: 'auto';
+        marginRight: '-50%';
+        transform: 'translate(-50%, -50%)';
+}
+
+.box img{
+    height: 400px;
+    padding: 19px 19px
+}
+
+.box div {
+  background: #4e5d6c;
+  padding: 0px 0px
+}
+
+
+
+
+  
+
+
 
