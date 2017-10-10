@@ -10,15 +10,17 @@ class ShowList extends Component {
         super(props)
 
         this.state = {
-            select: null
+            show: []
         }
 
     }
 
     handleClick(info) {
-        console.log('this is:', this);
-        console.log('info is:', this.props);
-        return (<Details this={this} />)
+        if(!info) return null
+        // console.log('this is:', this);
+        console.log('info isaaaaa:', info);
+         <Details tvshow={info} />
+         this.setState({show: info})
     }
 
     buildList() {
@@ -31,7 +33,7 @@ class ShowList extends Component {
             }
 
             return (
-                <Button handleClick={this.handleClick.bind(this)} listValue={listValue} img={img} />
+                <Button handleClick={() => this.handleClick(listValue.show)} listValue={listValue} img={img} key={listValue.show.id} />
             )
         }.bind(this));
     }
@@ -39,12 +41,15 @@ class ShowList extends Component {
     render() {
         if (!this.props.list) return
         const elements = this.buildList();
+        const detail = this.handleClick();
         // console.log("elements", elements);
         return (
             <div className='list' id='shows'>
+                <Details info={this.state.show} />
                 <ul>
                     {elements}
                 </ul>
+                
             </div>
         );
     }

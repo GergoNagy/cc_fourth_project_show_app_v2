@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchInput, { createFilter } from 'react-search-input'
+import SearchInput from 'react-search-input'
 import './style.css'
 import ShowList from './showList'
 // import '../style/index.css';
