@@ -1,27 +1,43 @@
 import React from 'react'
 import Img from 'react-image'
+import Calendar from './Calendar'
+import ReactHtmlParser from 'react-html-parser';
+
 
 class Details extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            show: []
+            show: [],
+            favShows: []
         }
     }
 
     save(data) {
-        this.setState({ show: data })
-        console.log(data)
+        this.setState({ favShows: this.props })
+        console.log('fav', this.props);
+        // handler1 = { this.props.handler1 }
+        this.send()
     }
+
+    send() {
+        let show = this.state.favShows
+        this.props.handler1(show)
+    }
+    
     render() {
+        let img = null
+        if (this.props.info.image) {
+            img = <Img src={this.props.info.image.original} />
+        }
         if (!this.props.info) return null
+        
         return (
             <div className='box'>
-                {/* {console.log('details', this.props.info.name)} */}
                 <div className="row">
                     <div className="col-md-4">
-                        <Img src={this.props.info.image.original} className="thumbnail"/>
+                        {img}
                     </div>
                         <div className="col-md-8">
                         <h2>{this.props.info.name}</h2>
@@ -40,13 +56,14 @@ class Details extends React.Component {
                     <div className="row">
                         <div className="well">
                             <h3>Plot</h3>
-                            {this.props.info.summary}
+                            <div dangerouslySetInnerHTML={{ __html: this.props.info.summary }} />
                         </div>
+                        <button className="btn btn-primary" onClick={this.save.bind(this) } >Save</button>
                     </div>
             </div>
                         )
     }
 
-}
+};
 
 export default Details

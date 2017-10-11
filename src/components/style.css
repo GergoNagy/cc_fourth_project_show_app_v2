@@ -76,12 +76,16 @@ li {
 
 .box img{
     height: 400px;
-    padding: 19px 19px
+    padding: 10px 10px 10px 10px;
 }
 
 .box div {
   background: #4e5d6c;
   padding: 0px 0px
+}
+
+.col-md-4 {
+  right: 5px;
 }
 
 

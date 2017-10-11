@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dayz": "^0.7.3",
     "material-ui": "^0.19.4",
     "react": "^16.0.0",
+    "react-big-calendar": "^0.16.1",
     "react-dom": "^16.0.0",
+    "react-html-parser": "^2.0.1",
     "react-image": "^1.0.1",
     "react-modal": "^3.0.0",
     "react-modal-dialog": "^4.0.7",

@@ -5,6 +5,79 @@ import Button from '../Button'
 import Details from './Details'
 import Modal from 'react-modal';
 
+class ShowList extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            show: [],
+            modalIsOpen: false,
+            fav:[]
+        }
+
+        this.closeModal = this.closeModal.bind(this);
+
+    }
+
+
+    handleClick(info) {
+        this.setState({ modalIsOpen: true });
+        //  <Details tvshow={info} />;
+         this.setState({show: info});
+    }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+    }
+
+    buildList() {
+        return this.props.list.map(function (listValue) {
+            let img = null
+            if (listValue.show.image) {
+                img = <Img src={listValue.show.image.medium} />
+            } else {
+                img = <Img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3RlnwzpAqKPdW3vXVpKg_oJZ7u5QHRD672y_Eih0khjPhiRVB' />
+            }
+
+            return (
+                <Button handleClick={this.handleClick.bind(this)} listValue={listValue} img={img} key={listValue.show.id} />
+            )
+        }.bind(this));
+    }
+
+    save(info){
+        console.log('data', info)
+        this.setState({fav: info});
+    }
+
+    render() {
+        if (!this.props.list) return
+        const elements = this.buildList();
+
+        return (
+            <div className='list' id='shows'>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    id= 'customStyles'
+                    contentLabel="Example Modal"
+                >
+                    <Details id='model' info={this.state.show} handler1={this.props.handler}/>
+                    {/* <button className="btn btn-default" onClick={this.closeModal}>close</button> */}
+                </Modal>
+                <ul>
+                    {elements}
+                </ul>
+            </div>
+        );
+    }
+}
+
+export default ShowList
+
 const customStyles = {
 
     overlay: {
@@ -33,84 +106,3 @@ const customStyles = {
         width: '80%'
     }
 };
-
-
-
-class ShowList extends Component {
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            show: [],
-            modalIsOpen: false
-        }
-
-        // this.openModal = this.openModal.bind(this);
-        // this.afterOpenModal = this.afterOpenModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-
-    }
-
-
-    handleClick(info) {
-        // if(!info) return null;
-        // console.log('this is:', this);
-        // console.log('info isaaaaa:', info);
-        this.setState({ modalIsOpen: true });
-         <Details tvshow={info} />;
-         this.setState({show: info});
-         
-         console.log(this.state)
-    }
-
-    // afterOpenModal() {
-    //     // references are now sync'd and can be accessed.
-    //     this.subtitle.style.color = '#f00';
-    // }
-
-    closeModal() {
-        this.setState({ modalIsOpen: false });
-    }
-
-    buildList() {
-        return this.props.list.map(function (listValue) {
-            let img = null
-            if (listValue.show.image) {
-                img = <Img src={listValue.show.image.medium} />
-            } else {
-                img = <Img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3RlnwzpAqKPdW3vXVpKg_oJZ7u5QHRD672y_Eih0khjPhiRVB' />
-            }
-
-            return (
-                <Button handleClick={this.handleClick.bind(this)} listValue={listValue} img={img} key={listValue.show.id} />
-            )
-        }.bind(this));
-    }
-
-    render() {
-        if (!this.props.list) return
-        const elements = this.buildList();
-        // const detail = this.handleClick();
-        return (
-            <div className='list' id='shows'>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    id= 'customStyles'
-                    contentLabel="Example Modal"
-                >
-                    <Details id ='model' info={this.state.show} />
-                    <button className="btn btn-primary" onClick={this.closeModal}>close</button>
-                </Modal>
-                <ul>
-                    {elements}
-                </ul>
-            </div>
-        );
-    }
-}
-
-export default ShowList
